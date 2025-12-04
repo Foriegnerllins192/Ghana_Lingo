@@ -1,0 +1,35 @@
+{
+  "name": "ghanalingo",
+  "version": "1.0.0",
+  "description": "A comprehensive Ghanaian language learning platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cookie-parser": "^1.4.7",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "keywords": [
+    "ghana",
+    "language",
+    "learning",
+    "twi",
+    "ewe",
+    "ga"
+  ],
+  "author": "Ghana Lingo Team",
+  "license": "MIT"
+}
