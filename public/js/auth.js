@@ -353,7 +353,7 @@ function handleRegister(e) {
     
     // Send registration request to server
     console.log('Sending registration data to server:', { firstName, lastName, email, password, preferredLanguage });
-    
+
     fetch("/api/register", {
       method: "POST",
       headers: {

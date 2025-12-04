@@ -8,7 +8,7 @@ const { pool } = require('./config/db');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SECRET_KEY = 'ghanalingo_secret_key'; // In production, use environment variable
+const SECRET_KEY = process.env.JWT_SECRET || 'ghanalingo_secret_key'; // Use environment variable in production
 
 // Middleware - Fixed JSON parsing
 app.use(express.json());
@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Enhanced session middleware
 app.use(session({
-    secret: 'ghanalingo_session_secret',
+    secret: process.env.SESSION_SECRET || 'ghanalingo_session_secret',
     resave: false,
     saveUninitialized: false,
     cookie: { 
@@ -541,8 +541,5 @@ app.get('/api/test-users', (req, res) => {
     });
 });
 
-// Start server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log(`Visit http://localhost:${PORT} to view the application`);
-});
+// Export the app for Vercel
+module.exports = app;

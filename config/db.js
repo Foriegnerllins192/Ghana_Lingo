@@ -1,19 +1,21 @@
-const mysql = require('mysql');
+const mysql = require('mysql2'); // Use mysql2 for better performance and compatibility
 
 // Create connection pool with enhanced configuration
 const pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'ghana_lingo',
+    host: process.env.MYSQL_HOST || 'localhost',
+    user: process.env.MYSQL_USER || 'root',
+    password: process.env.MYSQL_PASSWORD || '',
+    database: process.env.MYSQL_DATABASE || 'ghana_lingo',
+    port: process.env.MYSQL_PORT || 3306,
     charset: 'utf8mb4',
     timezone: 'local',
     connectTimeout: 30000,
     acquireTimeout: 30000,
     timeout: 30000,
     reconnect: true,
-    multipleStatements: false
+    multipleStatements: false,
+    ssl: process.env.MYSQL_SSL === 'true' ? { rejectUnauthorized: true } : false
 });
 
 // Add event listeners for debugging
@@ -53,7 +55,11 @@ const getConnection = (callback) => {
     });
 };
 
+// Promisify the pool for async/await usage
+const promisePool = pool.promise();
+
 module.exports = {
     pool,
-    getConnection
+    getConnection,
+    promisePool
 };
